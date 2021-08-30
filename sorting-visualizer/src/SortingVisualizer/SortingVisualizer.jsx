@@ -9,15 +9,16 @@ import { getBubbleSortAnimations } from '../sortingAlgorithms/BubbleSort';
 import { getCycleSortAnimations } from '../sortingAlgorithms/CycleSort';
 import { getCountingSortAnimations } from '../sortingAlgorithms/CountingSort';
 
+
 import './SortingVisualizer.css';
 
-const ANIMATION_SPEED_MS = 5;
+const ANIMATION_SPEED_MS = 10;
 
 const NUMBER_OF_ARRAY_BARS = 100;
 
 const PRIMARY_COLOR = 'pink';
 
-const SECONDARY_COLOR = 'red';
+const SECONDARY_COLOR = 'purple';
 
 export default class SortingVisualizer extends React.Component {
   constructor(props) {
@@ -243,36 +244,36 @@ export default class SortingVisualizer extends React.Component {
     }
   }
 
-/*Counting Sort Might not work */
-//because counting sort do not compare array elements
-countingSort() {
-  //const animations = getBubbleSortAnimations(this.state.array);
-  const [animations, sortArray] = getCountingSortAnimations(this.state.array);
-  for (let i = 0; i < animations.length; i++) {
-    const isColorChange = animations[i][0] == "comparision1";
-    const arrayBars = document.getElementsByClassName('array-bar');
-    if (isColorChange === true) {
-      const color = (animations[i][0] == "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
-      const [comparision, barOneIndex] = animations[i];
-      const barOneStyle = arrayBars[barOneIndex].style;
-      //const barTwoStyle = arrayBars[barTwoIndex].style;
-      setTimeout(() => {
-        barOneStyle.backgroundColor = color;
-        //barTwoStyle.backgroundColor = color;
-      }, i * ANIMATION_SPEED_MS);
-    }
-    else {
-      const [swap, barIndex, newHeight] = animations[i];
-      if (barIndex === -1) {
-        continue;
+  /*Counting Sort Might not work */
+  //because counting sort do not compare array elements
+  countingSort() {
+    //const animations = getBubbleSortAnimations(this.state.array);
+    const [animations, sortArray] = getCountingSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const isColorChange = animations[i][0] == "comparision1";
+      const arrayBars = document.getElementsByClassName('array-bar');
+      if (isColorChange === true) {
+        const color = (animations[i][0] == "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+        const [comparision, barOneIndex] = animations[i];
+        const barOneStyle = arrayBars[barOneIndex].style;
+        //const barTwoStyle = arrayBars[barTwoIndex].style;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          //barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
       }
-      const barStyle = arrayBars[barIndex].style;
-      setTimeout(() => {
-        barStyle.height = `${newHeight}px`;
-      }, i * ANIMATION_SPEED_MS);
+      else {
+        const [swap, barIndex, newHeight] = animations[i];
+        if (barIndex === -1) {
+          continue;
+        }
+        const barStyle = arrayBars[barIndex].style;
+        setTimeout(() => {
+          barStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
     }
   }
-}
 
 
 
@@ -314,7 +315,9 @@ countingSort() {
         {/*<button onClick={() => this.cycleSort()}>Cycle Sort</button>
         <button onClick={() => this.countingSort()}>Counting Sort</button>*/}
       </div>
+
     );
+    
   }
 }
 
@@ -331,3 +334,4 @@ function arraysAreEqual(arrayOne, arrayTwo) {
   }
   return true;
 }
+
