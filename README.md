@@ -14,7 +14,7 @@
 4. Radix Sort
 5. Bucket Sort
 
-# To Run on OS
-1. Clone git repository
+# To Run on your OS
+1. First FORK this repository on your github and then CLONE it using git clone command
 2. run npm install
 3. run npm start
