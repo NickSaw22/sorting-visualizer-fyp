@@ -1,5 +1,4 @@
-# sorting visualizer
-# Sorting Algorithms Visualization 
+# Sorting Algorithms Visualizer 
 # Implemented: 
 1. Selection Sort
 2. Bubble Sort
