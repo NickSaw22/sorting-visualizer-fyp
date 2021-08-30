@@ -6,13 +6,13 @@
 4. Merge Sort
 5. Quick Sort(Using Hoare's Partition)
 6. Heap Sort
+7. Shell Sort
 
 # Under Developmenmt:
-1. Shell Sort
-2. Cycle Sort
-3. Counting Sort 
-4. Radix Sort
-5. Bucket Sort
+1. Cycle Sort
+2. Counting Sort 
+3. Radix Sort
+4. Bucket Sort
 
 # To Run on your OS:
 1. First FORK this repository on your github and then CLONE it using git clone command
