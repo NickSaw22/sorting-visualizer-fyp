@@ -277,7 +277,6 @@ export default class SortingVisualizer extends React.Component {
   /*Counting Sort Might not work */
   //because counting sort do not compare array elements
   countingSort() {
-    //const animations = getBubbleSortAnimations(this.state.array);
     const [animations, sortArray] = getCountingSortAnimations(this.state.array);
     for (let i = 0; i < animations.length; i++) {
       const isColorChange = animations[i][0] == "comparision1";
@@ -344,7 +343,7 @@ export default class SortingVisualizer extends React.Component {
         <button onClick={() => this.shellSort()}>Shell Sort</button>
         <button onClick={() => this.heapSort()}>Heap Sort</button>
         <button onClick={() => this.cycleSort()}>Cycle Sort</button>
-        {/*<button onClick={() => this.countingSort()}>Counting Sort</button>*/}
+        <button onClick={() => this.countingSort()}>Counting Sort</button>
       </div>
 
     );

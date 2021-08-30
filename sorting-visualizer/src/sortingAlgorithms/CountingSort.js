@@ -21,12 +21,8 @@ function countingSort(a, animations){
     let index=0;
     for(let i=0; i<k; i++){
         for(let j=0; j<count[i]; j++){
-            animations.push(["comparision1", i]);
-                       
-            //animations.push(["overwrite", index, a[i]]);
-            /*
-            animations.push(["overwrite", a[index], i]);*/
-            //animations.push(["overwrite", j+1, auxillaryArray[j]]);
+            animations.push(["comparision1", index]);
+            animations.push(["overwrite", index, i]);
             a[index]=i;
             index++;
         }
