@@ -19,7 +19,7 @@ function shellSort(auxillaryArray, animations) {
                 
                 animations.push(["comparision1", j, j-gap]);
                 animations.push(["overwrite", j, auxillaryArray[j-gap]]);
-				auxillaryArray[j] = auxillaryArray[j-gap];
+				auxillaryArray[j] = auxillaryArray[j-gap];cd
                 animations.push(["comparision2", j, j-gap]);
 			}
             animations.push(["overwrite", j, temp]);
