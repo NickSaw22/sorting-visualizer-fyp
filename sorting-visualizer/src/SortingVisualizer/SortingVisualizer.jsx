@@ -13,13 +13,13 @@ import { getCountingSortAnimations } from '../sortingAlgorithms/CountingSort';
 
 import './SortingVisualizer.css';
 
-const ANIMATION_SPEED_MS = 5;
+const ANIMATION_SPEED_MS = 10;
 
-const NUMBER_OF_ARRAY_BARS = 100;
+const NUMBER_OF_ARRAY_BARS = 10;
 
 const PRIMARY_COLOR = 'pink';
 
-const SECONDARY_COLOR = 'red';
+const SECONDARY_COLOR = 'purple';
 
 export default class SortingVisualizer extends React.Component {
   constructor(props) {
@@ -249,6 +249,37 @@ export default class SortingVisualizer extends React.Component {
   cycleSort() {
     const [animations, sortArray] = getCycleSortAnimations(this.state.array);
     for (let i = 0; i < animations.length; i++) {
+      const isColorChange = animations[i][0] == "comparision1" || animations[i][0] == "comparision2";
+      const arrayBars = document.getElementsByClassName('array-bar');
+      if (isColorChange === true) {
+        const color = (animations[i][0] == "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+        const [comparision, barOneIndex, barTwoIndex] = animations[i];
+        const barOneStyle = arrayBars[barOneIndex].style;
+        const barTwoStyle = arrayBars[barTwoIndex].style;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color; 
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      }
+      else {
+        const [swap, barIndex, newHeight] = animations[i];
+        if (barIndex === -1) {
+          continue;
+        }
+        const barStyle = arrayBars[barIndex].style;
+        setTimeout(() => {
+          barStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
+  }
+
+  /*Counting Sort Might not work */
+  //because counting sort do not compare array elements
+  countingSort() {
+    //const animations = getBubbleSortAnimations(this.state.array);
+    const [animations, sortArray] = getCountingSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
       const isColorChange = animations[i][0] == "comparision1";
       const arrayBars = document.getElementsByClassName('array-bar');
       if (isColorChange === true) {
@@ -273,37 +304,6 @@ export default class SortingVisualizer extends React.Component {
       }
     }
   }
-
-/*Counting Sort Might not work */
-//because counting sort do not compare array elements
-countingSort() {
-  //const animations = getBubbleSortAnimations(this.state.array);
-  const [animations, sortArray] = getCountingSortAnimations(this.state.array);
-  for (let i = 0; i < animations.length; i++) {
-    const isColorChange = animations[i][0] == "comparision1";
-    const arrayBars = document.getElementsByClassName('array-bar');
-    if (isColorChange === true) {
-      const color = (animations[i][0] == "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
-      const [comparision, barOneIndex] = animations[i];
-      const barOneStyle = arrayBars[barOneIndex].style;
-      //const barTwoStyle = arrayBars[barTwoIndex].style;
-      setTimeout(() => {
-        barOneStyle.backgroundColor = color;
-        //barTwoStyle.backgroundColor = color;
-      }, i * ANIMATION_SPEED_MS);
-    }
-    else {
-      const [swap, barIndex, newHeight] = animations[i];
-      if (barIndex === -1) {
-        continue;
-      }
-      const barStyle = arrayBars[barIndex].style;
-      setTimeout(() => {
-        barStyle.height = `${newHeight}px`;
-      }, i * ANIMATION_SPEED_MS);
-    }
-  }
-}
 
 
 
@@ -333,7 +333,7 @@ countingSort() {
             style={{
               backgroundColor: PRIMARY_COLOR,
               height: `${value}px`,
-            }}></div>
+            }}></div>//{value} to check if algorithm is working or not
         ))}
         <button onClick={() => this.resetArray()}>Generate New Array</button>
         <button onClick={() => this.mergeSort()}>Merge Sort</button>
@@ -343,10 +343,12 @@ countingSort() {
         <button onClick={() => this.insertionSort()}>Insertion Sort</button>
         <button onClick={() => this.shellSort()}>Shell Sort</button>
         <button onClick={() => this.heapSort()}>Heap Sort</button>
-        {/*<button onClick={() => this.cycleSort()}>Cycle Sort</button>
-        <button onClick={() => this.countingSort()}>Counting Sort</button>*/}
+        <button onClick={() => this.cycleSort()}>Cycle Sort</button>
+        {/*<button onClick={() => this.countingSort()}>Counting Sort</button>*/}
       </div>
+
     );
+    
   }
 }
 
@@ -363,3 +365,4 @@ function arraysAreEqual(arrayOne, arrayTwo) {
   }
   return true;
 }
+

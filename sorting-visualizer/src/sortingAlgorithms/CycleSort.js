@@ -8,89 +8,73 @@ export function getCycleSortAnimations(array) {
     return [animations, array];
 }
 
+
 function cycleSort(arr, animations) {
     const n = arr.length;
-    // count number of memory writes
     let writes = 0;
 
-    // traverse array elements and put it to on
-    // the right place
     for (let cycle_start = 0; cycle_start < n - 1; cycle_start++) {
 
-        // initialize item as starting point
         let item = arr[cycle_start];
         let toswap=cycle_start;
-        // Find position where we put the item. We basically
-        // count all smaller elements on right side of item.
         let pos = cycle_start;
+
         for (let i = cycle_start + 1; i < n; i++)
             if (arr[i] < item) {
-                animations.push(["comparision1", i, pos]);
-                animations.push(["comparision2", i, pos]);
+                animations.push(["comparision1", pos, i]);
+                animations.push(["comparision2", pos, i]);
                 pos++;
             }
 
-        // If item is already in correct position
         if (pos == cycle_start){
             continue;
         }
 
-        // ignore all duplicate elements
+
         while (item == arr[pos]){
             pos += 1;
         }
 
-        // put the item to it's right position
         if (pos != cycle_start) {
             //swap a[pos] and item
-            /*let temp = item;
-            item = arr[pos];
-            arr[pos] = temp;*/
-            //animations.push(["swap", pos, item]);
+
+            animations.push(["swap", pos, item]);
             //animations.push(["swap", toswap, arr[pos]]);
             let temp = item;
             item = arr[pos];
             arr[pos] = temp;
-            //swap(arr, pos, toswap);
+      
             writes++;
         }
-        toswap=pos;/*Something wrong in this loop*/
-        // Rotate rest of the cycle
+        toswap=pos;
         while (pos != cycle_start) {
             pos = cycle_start;
 
-            // Find position where we put the element
             for (let i = cycle_start + 1; i < n; i++)
                 if (arr[i] < item) {
-                    animations.push(["comparision1", i, pos]);
-                    animations.push(["comparision2", i, pos]);
+                    animations.push(["comparision1", pos, i]);
+                    animations.push(["comparision2", pos, i]);
                     pos += 1;
                 }
 
-            // ignore all duplicate elements
             while (item == arr[pos]) {
+                toswap=pos;
                 pos += 1;
             }
 
-            // put the item to it's right position
             if (item != arr[pos]) {
                 //swap a[pos] with item
-                /*let temp = item;
-                item = arr[pos];
-                arr[pos] = temp;*/
-                //animations.push(["overwrite", pos, item]);
-
-                /*animations.push(["swap", pos, item]);
-                animations.push(["swap", toswap, arr[pos]]);*/
-                /*let temp = item;
+                animations.push(["swap", pos, item]);
+                //animations.push(["swap", toswap, arr[pos]]);
+                let temp = item;
                 item = arr[pos];
                 arr[pos] = temp;
-                animations.push(["swap", pos, item]);
-                animations.push(["swap", toswap, arr[pos]]);*/
+                //animations.push(["overwrite", pos, item]);
+
+                //animations.push(["swap", toswap, arr[pos]]);
                 //swap(arr, pos, toswap);
                 writes++;
             }
-            toswap=pos;
         }
     }
 }
