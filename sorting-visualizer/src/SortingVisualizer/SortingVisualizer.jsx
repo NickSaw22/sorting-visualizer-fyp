@@ -15,7 +15,7 @@ import './SortingVisualizer.css';
 
 const ANIMATION_SPEED_MS = 10;
 
-const NUMBER_OF_ARRAY_BARS = 10;
+const NUMBER_OF_ARRAY_BARS = 100;
 
 const PRIMARY_COLOR = 'pink';
 
