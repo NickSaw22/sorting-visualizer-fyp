@@ -279,7 +279,7 @@ export default class SortingVisualizer extends React.Component {
   countingSort() {
     const [animations, sortArray] = getCountingSortAnimations(this.state.array);
     for (let i = 0; i < animations.length; i++) {
-      const isColorChange = animations[i][0] == "comparision1";
+      const isColorChange = animations[i][0] == "comparision1"  || animations[i][0] == "comparision2";
       const arrayBars = document.getElementsByClassName('array-bar');
       if (isColorChange === true) {
         const color = (animations[i][0] == "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
