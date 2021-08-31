@@ -1,66 +1,52 @@
 export function getMergeSortAnimations(array) {
-    const animations = [];
-    if (array.length <= 1) return array;
-    const auxiliaryArray = array.slice();
-    mergeSortHelper(array, 0, array.length - 1, auxiliaryArray, animations);
-    return animations;
+    let animations  = [];
+    let auxillaryArray = array.slice();
+    mergeSort(auxillaryArray, 0, auxillaryArray.length - 1, animations);
+    const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
+    console.log(arraysAreEqual(javaScriptSortedArray, auxillaryArray));
+    array = auxillaryArray;
+    return [animations, array];
 }
 
-function mergeSortHelper(
-    mainArray,
-    startIdx,
-    endIdx,
-    auxiliaryArray,
-    animations,
-) {
-    if (startIdx === endIdx) return;
-    const middleIdx = Math.floor((startIdx + endIdx) / 2);
-    mergeSortHelper(auxiliaryArray, startIdx, middleIdx, mainArray, animations);
-    mergeSortHelper(auxiliaryArray, middleIdx + 1, endIdx, mainArray, animations);
-    doMerge(mainArray, startIdx, middleIdx, endIdx, auxiliaryArray, animations);
+function mergeSort(auxillaryArray, startIndex, endIndex, animations) {
+    if(startIndex === endIndex)
+        return;
+    const middleIndex = Math.floor((startIndex + endIndex)/2);
+    mergeSort(auxillaryArray, startIndex, middleIndex, animations);
+    mergeSort(auxillaryArray, middleIndex + 1, endIndex, animations);
+    merge(auxillaryArray, startIndex, middleIndex, endIndex, animations);
 }
 
-function doMerge(
-    mainArray,
-    startIdx,
-    middleIdx,
-    endIdx,
-    auxiliaryArray,
-    animations,
-) {
-    let k = startIdx;
-    let i = startIdx;
-    let j = middleIdx + 1;
-    while (i <= middleIdx && j <= endIdx) {
-        animations.push([i, j]);
-        animations.push([i, j]);
-        if (auxiliaryArray[i] <= auxiliaryArray[j]) {
-            animations.push([k, auxiliaryArray[i]]);
-            mainArray[k++] = auxiliaryArray[i++];
-        } else {
-            animations.push([k, auxiliaryArray[j]]);
-            mainArray[k++] = auxiliaryArray[j++];
+function merge(auxillaryArray, startIndex, middleIndex, endIndex, animations) {
+    let sortArray = [];
+    let i = startIndex;
+    let j = middleIndex + 1;
+    while(i <= middleIndex && j <= endIndex) {
+        animations.push(["comparision1", i, j]);
+        animations.push(["comparision2", i, j]);
+        if(auxillaryArray[i] <= auxillaryArray[j]) {
+            sortArray.push(auxillaryArray[i++]);
+        }
+        else {
+            sortArray.push(auxillaryArray[j++]);
         }
     }
-    while (i <= middleIdx) {
-        animations.push([i, i]);
-        animations.push([i, i]);
-        animations.push([k, auxiliaryArray[i]]);
-        mainArray[k++] = auxiliaryArray[i++];
+    while(i <= middleIndex) {
+        animations.push(["comparision1", i, i]);
+        animations.push(["comparision2", i, i]);
+        sortArray.push(auxillaryArray[i++]);
     }
-    while (j <= endIdx) {
-
-        animations.push([j, j]);
-        animations.push([j, j]);
-        animations.push([k, auxiliaryArray[j]]);
-        mainArray[k++] = auxiliaryArray[j++];
+    while(j <= endIndex) {
+        animations.push(["comparision1", j, j]);
+        animations.push(["comparision2", j, j]);
+        sortArray.push(auxillaryArray[j++]);
     }
-}
-
-function swap(auxillaryArray, firstIndex, secondIndex) {
-    let temp = auxillaryArray[firstIndex];
-    auxillaryArray[firstIndex] = auxillaryArray[secondIndex];
-    auxillaryArray[secondIndex] = temp;
+    for (let i = startIndex; i <= endIndex; i++) {
+        animations.push(["comparision1", i, i - startIndex]);
+        animations.push(["overwrite", i, sortArray[i - startIndex]]);
+        animations.push(["comparision2", i, i - startIndex]);
+        auxillaryArray[i] = sortArray[i - startIndex];
+    }
 }
 
 function arraysAreEqual(firstArray, secondArray) {
@@ -68,9 +54,9 @@ function arraysAreEqual(firstArray, secondArray) {
         return false;
     }
     for (let i = 0; i < firstArray.length; i++) {
-        if (firstArray[i] !== secondArray[i]) {
-            return false;
-        }
+      if (firstArray[i] !== secondArray[i]) {
+        return false;
+      }
     }
     return true;
 }
