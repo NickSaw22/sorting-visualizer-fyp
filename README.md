@@ -10,9 +10,7 @@
 8. Cycle Sort
 9. Counting Sort
 10. Radix Sort
-
-# Under Developmenmt:
-1. Bucket Sort
+11. Bucket Sort
 
 # To Run on your OS:
 1. First FORK this repository on your github and then CLONE it using git clone command
