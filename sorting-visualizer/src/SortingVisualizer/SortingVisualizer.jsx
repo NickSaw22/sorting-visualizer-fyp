@@ -11,11 +11,9 @@ import { getCycleSortAnimations } from '../sortingAlgorithms/CycleSort';
 import { getCountingSortAnimations } from '../sortingAlgorithms/CountingSort';
 import { getRadixSortAnimations } from '../sortingAlgorithms/RadixSort';
 import { getBucketSortAnimations } from '../sortingAlgorithms/BucketSort';
-
-
 import './SortingVisualizer.css';
 
-const ANIMATION_SPEED_MS = 10;
+const ANIMATION_SPEED_MS = 5;
 
 const NUMBER_OF_ARRAY_BARS = 100;
 
@@ -59,8 +57,6 @@ export default class SortingVisualizer extends React.Component {
   }
 
   disableSortButtons() {
-    //document.getElementById("test5").disabled = true;
-
     document.getElementById("generateNewArray").disabled = true;
     document.getElementById("mergeSort").disabled = true;
     document.getElementById("quickSort").disabled = true;
@@ -76,8 +72,6 @@ export default class SortingVisualizer extends React.Component {
   }
 
   restoreStoreButtons() {
-    //document.getElementById("test5").disabled = false;
-
     document.getElementById("generateNewArray").disabled = false;
     document.getElementById("mergeSort").disabled = false;
     document.getElementById("quickSort").disabled = false;
@@ -189,7 +183,10 @@ export default class SortingVisualizer extends React.Component {
         <button id="selectionSort" style={{ marginRight: '8px' }} onClick={() => this.sort('selectionSort')}>Selection Sort</button>
         <button id="shellSort" style={{ marginRight: '8px' }} onClick={() => this.sort('shellSort')}>Shell Sort</button>
         <button id="cycleSort" style={{ marginRight: '8px' }} onClick={() => this.sort('cycleSort')}>Cycle Sort</button>
-        {/*this algos below does not compare array elements hence declared individually and require extra array*/}
+
+        {/*this algos below does not compare array elements hence declared different function bktsort() 
+        also it requires extra array so need to work on it but the animation works fine*/}
+        
         <button id="countingSort" style={{ marginRight: '8px' }} onClick={() => this.bktsort('countingSort')}>Counting Sort</button>
         <button id="radixSort" style={{ marginRight: '8px' }} onClick={() => this.sort('radixSort')}>Radix Sort</button>
         <button id="bucketSort" style={{ marginRight: '8px' }} onClick={() => this.sort('bucketSort')}>Bucket Sort</button>
