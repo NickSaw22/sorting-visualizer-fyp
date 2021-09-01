@@ -188,8 +188,8 @@ export default class SortingVisualizer extends React.Component {
         also it requires extra array so need to work on it but the animation works fine*/}
         
         <button id="countingSort" style={{ marginRight: '8px' }} onClick={() => this.bktsort('countingSort')}>Counting Sort</button>
-        <button id="radixSort" style={{ marginRight: '8px' }} onClick={() => this.sort('radixSort')}>Radix Sort</button>
-        <button id="bucketSort" style={{ marginRight: '8px' }} onClick={() => this.sort('bucketSort')}>Bucket Sort</button>
+        <button id="radixSort" style={{ marginRight: '8px' }} onClick={() => this.bktsort('radixSort')}>Radix Sort</button>
+        <button id="bucketSort" style={{ marginRight: '8px' }} onClick={() => this.bktsort('bucketSort')}>Bucket Sort</button>
       </div>
 
     );
