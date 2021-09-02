@@ -48,6 +48,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
 ## To Run on your OS:
-# 1. First FORK this repository on your github and then CLONE it using git clone command
-# 2. run npm install
-# 3. run npm start
+### First FORK this repository on your github and then CLONE it using git clone command
+### run npm install
+### run npm start
