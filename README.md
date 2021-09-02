@@ -48,6 +48,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
 ## To Run on your OS:
-### First FORK this repository on your github and then CLONE it using git clone command
-### run npm install
-### run npm start
+### First FORK this repository on your github and then CLONE it using `git clone` command then `cd sorting-visualizer`
+### run `npm install`
+### run `npm start`
