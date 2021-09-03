@@ -30,7 +30,7 @@ const algorithms = {
   "heapSort": getHeapSortAnimations,
   "cycleSort": getCycleSortAnimations,
   "shellSort": getShellSortAnimations,
-  "radixSsort": getRadixSortAnimations,
+  "radixSort": getRadixSortAnimations,
   "bucketSort": getBucketSortAnimations,
   "countingSort": getCountingSortAnimations
 }
